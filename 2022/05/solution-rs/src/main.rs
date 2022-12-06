@@ -29,7 +29,7 @@ fn main() {
     let moves = file[1].split("\n");
 
     let mut stacks = initialize_stacks(crates_data);
-    let mut stacks_copy = stacks.clone();
+    let stacks_copy = stacks.clone();
 
     for a_move in moves.clone() {
         let (count, from, to) = scan_fmt!(a_move, "move {} from {} to {}", i32, usize, usize).unwrap();
