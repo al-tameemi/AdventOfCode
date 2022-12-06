@@ -53,19 +53,9 @@ fn main() {
         let from = from - 1;
         let to = to - 1;
 
-
-        // println!("{:#?}", stacks[from]);
-        // println!("{:#?}", stacks[to]);
-
-
         let mut out: Vec<char> = stacks[from][(stacks[from].len() - count) ..].to_vec();
         stacks[from] = stacks[from][..(stacks[from].len() - count)].to_vec();
         stacks[to].append(&mut out);
-
-        // println!("{:#?}", a_move);
-        // println!("{:#?}", out);
-        // println!("{:#?}", stacks[from]);
-        // println!("{:#?}", stacks[to]);
     }
 
     for stack in stacks {
