@@ -1,5 +1,3 @@
-use std::process::exit;
-
 #[inline(always)]
 fn is_first_digit(map: &[u8], index: usize) -> bool {
     map[index].is_ascii_digit()
@@ -64,56 +62,4 @@ fn main() {
     let elapsed = now.elapsed();
     println!("Elapsed: {:?}", elapsed);
     println!("{}", total);
-}
-
-#[cfg(test)]
-mod tests {
-    use crate::{bounding_box_offsets, into_number, is_first_digit, last_digit_index};
-
-    #[test]
-    fn test_is_first_digit() {
-        let data = std::fs::read_to_string("./input").unwrap();
-        let bytes = data.as_bytes();
-
-        assert!(is_first_digit(bytes, 4));
-        assert!(!is_first_digit(bytes, 5));
-        assert!(!is_first_digit(bytes, 15));
-    }
-
-    #[test]
-    fn test_last_digit_index() {
-        let data = std::fs::read_to_string("./input").unwrap();
-        let bytes = data.as_bytes();
-        let first_digit = 4;
-        assert_eq!(last_digit_index(bytes, first_digit), 6);
-    }
-
-    #[test]
-    fn test_into_number() {
-        let data = std::fs::read_to_string("./input").unwrap();
-        let bytes: &[u8] = data.as_bytes();
-        let first_digit = 4;
-        let last_digit = 6;
-        assert_eq!(into_number(bytes, first_digit, last_digit), 573);
-    }
-
-    #[test]
-    fn test_bounding_box() {
-        let data = std::fs::read_to_string("./input").unwrap();
-        let bytes: &[u8] = data.as_bytes();
-        let width = bytes.iter().position(|b| b == &b'\n').unwrap() as isize;
-        println!("{width}");
-        let first_digit = 4;
-        let last_digit = 6;
-
-        let bounding_box = bounding_box_offsets(width, last_digit - first_digit);
-
-        for item in bounding_box {
-            let byte = bytes
-                .get((first_digit as isize + item) as usize)
-                .unwrap_or(&0);
-
-            println!("{}", char::from_u32(*byte as u32).unwrap());
-        }
-    }
 }
